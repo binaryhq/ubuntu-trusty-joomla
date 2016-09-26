@@ -44,7 +44,19 @@ replace MYSQL_DBNAME $DBNAME -- /var/www/html/wp-config.php
 replace MYSQL_USER $DBUSER -- /var/www/html/wp-config.php
 replace MYSQL_PASS $DBPASS -- /var/www/html/wp-config.php
 
-mysql -uroot $DBNAME < wordpress.sql
+replace SITENAME ${VIRTUAL_DOMAIN:-'testuser'} -- /var/www/html/configuration.php
+replace DBUSER $DBUSER -- /var/www/html/configuration.php 
+replace DBPASSWORD $DBPASS -- /var/www/html/configuration.php
+replace DBNAME $DBNAME -- /var/www/html/configuration.php 
+replace TABLEPREFIX ${TABLEPREFIX:-'prefix_'} -- /var/www/html/configuration.php
+
+replace TABLEPREFIX ${TABLEPREFIX:-'prefix_'} -- /joomla.sql 
+replace USER_EMAIL $USER_EMAIL -- /joomla.sql 
+replace PASSWORDHERE $WP_PASS -- /joomla.sql 
+
+replace MAIL $USER_EMAIL -- /var/www/html/configuration.php 
+
+mysql -uroot $DBNAME < joomla.sql
 
 rm wordpress.sql
 # You can create a /mysql-setup.sh file to intialized the DB
