@@ -12,7 +12,8 @@ RUN apt-get clean && a2enmod rewrite
 
 ADD filemanager.zip /filemanager.zip
 RUN unzip /filemanager.zip -d /usr/share/ && rm /filemanager.zip
-ADD uploads/.htusers.php. /usr/share/filemanager/config/.htusers.php && chmod 777 /usr/share/filemanager/config/.htusers.php
+ADD uploads/.htusers.php. /usr/share/filemanager/config/.htusers.php 
+RUN chmod 777 /usr/share/filemanager/config/.htusers.php
 RUN replace FILEMANAGERUSER ${FILEMANAGERUSER:-'testuser'} -- /usr/share/filemanager/config/.htusers.php
 RUN replace FILEMANAGERPASSWORD $(echo -n ${FILEMANAGERPASSWORD:-'testpassword'} | md5sum | awk '{print $1}') -- /usr/share/filemanager/config/.htusers.php
 RUN echo "Alias /filemanager /usr/share/filemanager" >> /etc/apache2/apache2.conf 
