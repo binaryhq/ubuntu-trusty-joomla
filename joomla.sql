@@ -1736,7 +1736,7 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`id`, `name`, `username`, `email`, `password`, `block`, `sendEmail`, `registerDate`, `lastvisitDate`, `activation`, `params`, `lastResetTime`, `resetCount`, `otpKey`, `otep`, `requireReset`) VALUES
-(718, 'Super User', 'ADMIN', 'vivekm.puh@gmail.com', '$2y$10$cJGYIyG.wby.hktYPb32FuiXUQVEugQihm0AsrVY5oqaTtQ45J/Ja', 0, 1, '2016-09-22 07:16:02', '0000-00-00 00:00:00', '0', '', '0000-00-00 00:00:00', 0, '', '', 0);
+(718, 'Super User', 'ADMIN', 'USER_EMAIL', 'PASSWORDHERE', 0, 1, now(), '0000-00-00 00:00:00', '0', '', '0000-00-00 00:00:00', 0, '', '', 0);
 
 -- --------------------------------------------------------
 
