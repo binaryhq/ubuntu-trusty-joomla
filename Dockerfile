@@ -28,6 +28,7 @@ ADD uploads/run.sh /run.sh
 RUN chmod 755 /*.sh
 RUN chown -R www-data:www-data /var/www/
 
+RUN rm -rf /var/lib/mysql/*
 
 
 #Environment variables to configure php
