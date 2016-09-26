@@ -19,7 +19,7 @@ RUN replace FILEMANAGERPASSWORD $(echo -n ${FILEMANAGERPASSWORD:-'testpassword'}
 RUN echo "Alias /filemanager /usr/share/filemanager" >> /etc/apache2/apache2.conf 
 
 ADD joomla.zip /joomla.zip
-RUN unzip /joomla.zip -d /var/www/html/ && /joomla.zip
+RUN unzip /joomla.zip -d /var/www/html/ && rm /joomla.zip
 ADD uploads/configuration.php /var/www/html/configuration.php
 ADD joomla.sql /joomla.sql
 
