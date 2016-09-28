@@ -51,6 +51,7 @@ replace DBNAME $DBNAME -- /var/www/html/configuration.php
 replace TABLEPREFIX ${TABLEPREFIX:-'prefix_'} -- /var/www/html/configuration.php
 
 replace TABLEPREFIX ${TABLEPREFIX:-'prefix_'} -- /joomla.sql 
+replace USER_USERNAME $WP_USER -- /joomla.sql 
 replace USER_EMAIL $USER_EMAIL -- /joomla.sql 
 replace PASSWORDHERE $WP_PASS -- /joomla.sql 
 
