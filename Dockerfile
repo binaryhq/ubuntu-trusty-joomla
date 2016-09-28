@@ -23,9 +23,19 @@ RUN unzip /joomla.zip -d /var/www/html/ && rm /joomla.zip
 ADD uploads/configuration.php /var/www/html/configuration.php
 ADD joomla.sql /joomla.sql
 
+ADD uploads/start-apache2.sh /start-apache2.sh
+ADD uploads/start-mysqld.sh /start-mysqld.sh
 ADD uploads/create_mysql_admin_user.sh /create_mysql_admin_user.sh
 ADD uploads/run.sh /run.sh
+
 RUN chmod 755 /*.sh
+RUN sed -i -e 's/^bind-address\s*=\s*127.0.0.1/#bind-address = 127.0.0.1/' /etc/mysql/my.cnf
+
+ADD uploads/supervisord-apache2.conf /etc/supervisor/conf.d/supervisord-apache2.conf
+ADD uploads/supervisord-mysqld.conf /etc/supervisor/conf.d/supervisord-mysqld.conf
+RUN rm -rf /var/lib/mysql/*
+
+
 RUN chown -R www-data:www-data /var/www/
 
 RUN rm -rf /var/lib/mysql/*
