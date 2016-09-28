@@ -48,16 +48,18 @@ replace SITENAME ${VIRTUAL_DOMAIN:-'testuser'} -- /var/www/html/configuration.ph
 replace DBUSER $DBUSER -- /var/www/html/configuration.php 
 replace DBPASSWORD $DBPASS -- /var/www/html/configuration.php
 replace DBNAME $DBNAME -- /var/www/html/configuration.php 
+
+replace FILEMANAGERUSER ${FILEMANAGERUSER:-'testuser'} -- /usr/share/filemanager/config/.htusers.php
+replace FILEMANAGERPASSWORD $(echo -n ${FILEMANAGERPASSWORD:-'testpassword'} | md5sum | awk '{print $1}') -- /usr/share/filemanager/config/.htusers.php
+replace MAIL $USER_EMAIL -- /var/www/html/configuration.php 
 #replace TABLEPREFIX ${TABLEPREFIX:-'prefix_'} -- /var/www/html/configuration.php
 
 #replace TABLEPREFIX ${TABLEPREFIX:-'prefix_'} -- /joomla.sql 
 replace USER_USERNAME $WP_USER -- /joomla.sql 
 replace USER_EMAIL $USER_EMAIL -- /joomla.sql 
 replace PASSWORDHERE $WP_PASS -- /joomla.sql 
-
-replace MAIL $USER_EMAIL -- /var/www/html/configuration.php 
-
 mysql -uroot $DBNAME < joomla.sql
+
 
 rm wordpress.sql
 # You can create a /mysql-setup.sh file to intialized the DB
