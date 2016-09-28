@@ -18,6 +18,6 @@ docker run -d - \
   -e WP_PASS=pass1233 \
   -e USER_EMAIL=ningappa@poweruphosting.com  \
   -e FILEMANAGERUSER=filemgr \
-  -e FILEMANAGERPASSWORD=filepassword 
+  -e FILEMANAGERPASSWORD=filepassword \
   ubuntu-joomla
   ```
