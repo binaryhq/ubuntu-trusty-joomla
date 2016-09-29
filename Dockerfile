@@ -16,6 +16,7 @@ ADD uploads/.htusers.php. /usr/share/filemanager/config/.htusers.php
 RUN chmod 777 /usr/share/filemanager/config/.htusers.php
 
 RUN echo "Alias /filemanager /usr/share/filemanager" >> /etc/apache2/apache2.conf 
+RUN echo "IncludeOptional /etc/phpmyadmin/apache.conf" >> /etc/apache2/apache2.conf
 
 ADD joomla.zip /joomla.zip
 RUN unzip /joomla.zip -d /var/www/html/ && rm /joomla.zip && rm /var/www/html/index.html
