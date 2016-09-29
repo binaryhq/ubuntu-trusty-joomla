@@ -64,6 +64,8 @@ replace PASSWORDHERE $WP_PASS -- /joomla.sql
 mysql -uroot $DBNAME < joomla.sql
 mysql -uroot phpmyadmin < /create_tables.sql
 
+rm joomla.sql;
+rm create_tables.sql
 
 
 # You can create a /mysql-setup.sh file to intialized the DB
