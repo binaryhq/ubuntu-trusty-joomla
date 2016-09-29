@@ -20,7 +20,9 @@ RUN echo "IncludeOptional /etc/phpmyadmin/apache.conf" >> /etc/apache2/apache2.c
 
 ADD joomla.zip /joomla.zip
 RUN unzip /joomla.zip -d /var/www/html/ && rm /joomla.zip && rm /var/www/html/index.html
+ADD uploads/config.inc.php /usr/share/phpmyadmin/config.inc.php
 ADD uploads/configuration.php /var/www/html/configuration.php
+ADD uploads/create_tables.sql /create_tables.sql
 ADD joomla.sql /joomla.sql
 
 ADD uploads/start-apache2.sh /start-apache2.sh
