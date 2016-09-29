@@ -38,6 +38,7 @@ mysql -uroot -e "GRANT ALL PRIVILEGES ON $DBNAME.* TO '$DBUSER'@'%' WITH GRANT O
 mysql -uroot -e "CREATE DATABASE phpmyadmin"
 mysql -uroot -e "CREATE USER 'pma'@'localhost' IDENTIFIED BY '$DBPASS'"
 mysql -uroot -e "GRANT ALL PRIVILEGES ON phpmyadmin.* TO 'pma'@'localhost' WITH GRANT OPTION"
+mysql -uroot -e "GRANT ALL PRIVILEGES ON phpmyadmin.* TO '$DBUSER'@'%' WITH GRANT OPTION"
 
 ## ##
 replace MYSQL_PASS $DBPASS -- /usr/share/phpmyadmin/config.inc.php
