@@ -35,14 +35,6 @@ mysql -uroot -e "CREATE DATABASE $DBNAME"
 mysql -uroot -e "CREATE USER '$DBUSER'@'%' IDENTIFIED BY '$DBPASS'"
 mysql -uroot -e "GRANT ALL PRIVILEGES ON $DBNAME.* TO '$DBUSER'@'%' WITH GRANT OPTION"
 
-mysql -uroot -e "CREATE DATABASE phpmyadmin"
-mysql -uroot -e "CREATE USER 'pma'@'localhost' IDENTIFIED BY '$DBPASS'"
-mysql -uroot -e "GRANT ALL PRIVILEGES ON phpmyadmin.* TO 'pma'@'localhost' WITH GRANT OPTION"
-mysql -uroot -e "GRANT ALL PRIVILEGES ON phpmyadmin.* TO '$DBUSER'@'%' WITH GRANT OPTION"
-
-## ##
-replace MYSQL_PASS $DBPASS -- /usr/share/phpmyadmin/config.inc.php
-
 replace SITENAME ${VIRTUAL_DOMAIN:-'testuser'} -- /var/www/html/configuration.php
 replace DBUSER $DBUSER -- /var/www/html/configuration.php 
 replace DBPASSWORD $DBPASS -- /var/www/html/configuration.php
@@ -63,11 +55,8 @@ replace USER_USERNAME $WP_USER -- /joomla.sql
 replace USER_EMAIL $USER_EMAIL -- /joomla.sql 
 replace PASSWORDHERE $WP_PASS -- /joomla.sql 
 mysql -uroot $DBNAME < joomla.sql
-mysql -uroot phpmyadmin < /create_tables.sql
 
 rm joomla.sql;
-rm create_tables.sql
-
 
 # You can create a /mysql-setup.sh file to intialized the DB
 if [ -f /mysql-setup.sh ] ; then
