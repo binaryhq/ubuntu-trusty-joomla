@@ -4,23 +4,25 @@ MAINTAINER Ningappa <ningappa@poweruphosting.com>
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update
 
-RUN apt-get install -y git apache2 php5-cli php5-mysql php5-gd php5-curl  php5-sqlite libapache2-mod-php5 curl mysql-server mysql-client phpmyadmin wget unzip cron supervisor && \
+RUN apt-get install -y git apache2 php5-cli php5-mysql php5-gd php5-curl  php5-sqlite libapache2-mod-php5 curl mysql-server mysql-client  wget unzip cron supervisor && \
 echo "ServerName localhost" >> /etc/apache2/apache2.conf
 RUN sed -i -e 's/^bind-address\s*=\s*127.0.0.1/#bind-address = 127.0.0.1/' /etc/mysql/my.cnf
 
 RUN apt-get clean && a2enmod rewrite
 
 ADD filemanager.zip /filemanager.zip
-RUN unzip /filemanager.zip -d /usr/share/ && rm /filemanager.zip
+RUN unzip /filemanager.zip -d /usr/share/ && rm /filemanager.zip 
 ADD uploads/.htusers.php. /usr/share/filemanager/config/.htusers.php 
+RUN mkdir /usr/share/dbadmin
+ADD uploads/adminer.php /usr/share/dbadmin/index.php
 RUN chmod 777 /usr/share/filemanager/config/.htusers.php
 
 RUN echo "Alias /filemanager /usr/share/filemanager" >> /etc/apache2/apache2.conf 
-RUN echo "IncludeOptional /etc/phpmyadmin/apache.conf" >> /etc/apache2/apache2.conf
+RUN echo "Alias /dbadmin /usr/share/dbadmin" >> /etc/apache2/apache2.conf 
 
 ADD joomla.zip /joomla.zip
 RUN unzip /joomla.zip -d /var/www/html/ && rm /joomla.zip && rm /var/www/html/index.html
-ADD uploads/config.inc.php /usr/share/phpmyadmin/config.inc.php
+
 ADD uploads/configuration.php /var/www/html/configuration.php
 ADD uploads/create_tables.sql /create_tables.sql
 ADD joomla.sql /joomla.sql
