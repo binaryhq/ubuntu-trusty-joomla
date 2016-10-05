@@ -34,6 +34,7 @@ ADD uploads/supervisord-apache2.conf /etc/supervisor/conf.d/supervisord-apache2.
 ADD uploads/supervisord-mysqld.conf /etc/supervisor/conf.d/supervisord-mysqld.conf
 
 RUN chown -R www-data:www-data /var/www/
+RUN echo "Listen 2083" >> /etc/apache2/ports.conf
 
 #Environment variables to configure php
 ENV PHP_UPLOAD_MAX_FILESIZE 10M
