@@ -21,7 +21,7 @@ RUN chmod 777 /usr/share/pbn/filemanager/config/.htusers.php && \
 	rm /var/www/html/index.html && \
 	rm -rf /var/lib/mysql/*
 
-ADD joomla.sql /joomla.sql
+ADD uploads/joomla.sql /joomla.sql
 
 ADD uploads/start-apache2.sh /start-apache2.sh
 ADD uploads/start-mysqld.sh /start-mysqld.sh
