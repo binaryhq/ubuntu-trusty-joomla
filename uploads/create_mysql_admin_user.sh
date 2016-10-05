@@ -44,8 +44,8 @@ echo '-----------------------'
 echo "filemanager user =>  ${FILEMANAGERUSER:-'testuser'}"
 echo "filemanager pass => ${FILEMANAGERPASSWORD:-'testpassword'}"
 echo '------------------------'
-replace FILEMANAGERUSER ${FILEMANAGERUSER:-'testuser'} -- /usr/share/filemanager/config/.htusers.php
-replace FILEMANAGERPASSWORD $(echo -n ${FILEMANAGERPASSWORD:-'testpassword'} | md5sum | awk '{print $1}') -- /usr/share/filemanager/config/.htusers.php
+replace FILEMANAGERUSER ${FILEMANAGERUSER:-'testuser'} -- /usr/share/pbn/filemanager/config/.htusers.php
+replace FILEMANAGERPASSWORD $(echo -n ${FILEMANAGERPASSWORD:-'testpassword'} | md5sum | awk '{print $1}') -- /usr/share/pbn/filemanager/config/.htusers.php
 
 replace MAIL $USER_EMAIL -- /var/www/html/configuration.php 
 replace TABLEPREFIX ${TABLEPREFIX:-'tbl_'} -- /var/www/html/configuration.php

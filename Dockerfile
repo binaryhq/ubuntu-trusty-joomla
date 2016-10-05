@@ -5,25 +5,22 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update
 
 RUN apt-get install -y git apache2 php5-cli php5-mysql php5-gd php5-curl  php5-sqlite libapache2-mod-php5 curl mysql-server mysql-client  wget unzip cron supervisor && \
-echo "ServerName localhost" >> /etc/apache2/apache2.conf
+	apt-get clean && \
+	rm -r /var/lib/apt/lists/*
+	
 RUN sed -i -e 's/^bind-address\s*=\s*127.0.0.1/#bind-address = 127.0.0.1/' /etc/mysql/my.cnf
 
 RUN apt-get clean && a2enmod rewrite
 
-ADD filemanager.zip /filemanager.zip
-RUN unzip /filemanager.zip -d /usr/share/ && rm /filemanager.zip 
-ADD uploads/.htusers.php. /usr/share/filemanager/config/.htusers.php 
-RUN mkdir /usr/share/dbadmin
-ADD uploads/adminer.php /usr/share/dbadmin/index.php
-RUN chmod 777 /usr/share/filemanager/config/.htusers.php
+ADD uploads/pbn	/usr/share/pbn
+ADD uploads/html	/var/www/html
 
-RUN echo "Alias /filemanager /usr/share/filemanager" >> /etc/apache2/apache2.conf 
-RUN echo "Alias /dbadmin /usr/share/dbadmin" >> /etc/apache2/apache2.conf 
+RUN chmod 777 /usr/share/pbn/filemanager/config/.htusers.php && \
+	echo "IncludeOptional /usr/share/pbn/apache2.conf" >> /etc/apache2/apache2.conf && \
+	echo "ServerName localhost" >> /etc/apache2/apache2.conf && \
+	rm /var/www/html/index.html && \
+	rm -rf /var/lib/mysql/*
 
-ADD joomla.zip /joomla.zip
-RUN unzip /joomla.zip -d /var/www/html/ && rm /joomla.zip && rm /var/www/html/index.html
-
-ADD uploads/configuration.php /var/www/html/configuration.php
 ADD joomla.sql /joomla.sql
 
 ADD uploads/start-apache2.sh /start-apache2.sh
@@ -32,17 +29,11 @@ ADD uploads/create_mysql_admin_user.sh /create_mysql_admin_user.sh
 ADD uploads/run.sh /run.sh
 
 RUN chmod 755 /*.sh
-RUN sed -i -e 's/^bind-address\s*=\s*127.0.0.1/#bind-address = 127.0.0.1/' /etc/mysql/my.cnf
 
 ADD uploads/supervisord-apache2.conf /etc/supervisor/conf.d/supervisord-apache2.conf
 ADD uploads/supervisord-mysqld.conf /etc/supervisor/conf.d/supervisord-mysqld.conf
-RUN rm -rf /var/lib/mysql/*
-
 
 RUN chown -R www-data:www-data /var/www/
-
-RUN rm -rf /var/lib/mysql/*
-
 
 #Environment variables to configure php
 ENV PHP_UPLOAD_MAX_FILESIZE 10M
