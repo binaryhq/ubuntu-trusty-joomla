@@ -7,8 +7,6 @@ docker build -t ubuntu-joomla https://github.com/ningappa/ubuntu-trusty-joomla.g
 
 docker run -d - \
   -name 6thstreet \
-  -v /6thstreet \
-  -e MYSQL_PASS=6thstreet \
   -e VIRTUAL_HOST=www.6thstreet.xyz  \
   -e VIRTUAL_DOMAIN=www.6thstreet.xyz \
   -e MYSQL_USER=mydbuser \
