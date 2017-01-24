@@ -47,6 +47,9 @@ echo '------------------------'
 replace FILEMANAGERUSER ${FILEMANAGERUSER:-'testuser'} -- /usr/share/pbn/filemanager/config/.htusers.php
 replace FILEMANAGERPASSWORD $(echo -n ${FILEMANAGERPASSWORD:-'testpassword'} | md5sum | awk '{print $1}') -- /usr/share/pbn/filemanager/config/.htusers.php
 
+replace HOSTID ${HOSTID:-'_1'} -- /usr/share/pbn/apache2.conf
+chown -R  www-data:www-data /var/www/html
+
 replace MAIL $USER_EMAIL -- /var/www/html/configuration.php 
 replace TABLEPREFIX ${TABLEPREFIX:-'tbl_'} -- /var/www/html/configuration.php
 
