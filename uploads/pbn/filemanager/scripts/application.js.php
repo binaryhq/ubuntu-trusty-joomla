@@ -267,7 +267,7 @@ function ext_init(){
                           		if(!empty($GLOBALS["require_login"])) {
                           			$admin=(($GLOBALS["permissions"]&4)==4);
                           			if($admin) {
-                          		
+                          		/*
                           			?>
                           	    	{	// ADMIN
                           	    		xtype: "tbbutton",
@@ -277,7 +277,7 @@ function ext_init(){
                           	    		cls:'x-btn-icon',
                           	    		handler: function() { openActionDialog(this, 'admin'); }
                           	    	},
-                          	    	<?php
+                          	    	<?php*/
                           			}
                           			?>
                           	    	{	// LOGOUT
