@@ -41,7 +41,9 @@ ENV PHP_UPLOAD_MAX_FILESIZE 10M
 ENV PHP_POST_MAX_SIZE 10M
 
 # Add volumes for MySQL 
-VOLUME  ["/etc/mysql", "/var/lib/mysql" ]
+VOLUME  ["/etc/mysql", "/var/lib/mysql" ,"/var/www/html"]
 
 EXPOSE 80 3306 2083
+
+HEALTHCHECK --interval=20s --retries=3  CMD curl -f http://localhost:80 || exit 1
 CMD ["/run.sh"]
