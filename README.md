@@ -5,8 +5,7 @@ docker build -t ubuntu-joomla https://github.com/ningappa/ubuntu-trusty-joomla.g
 ```
 ```
 
-docker run -d - \
-  -name 6thstreet \
+docker run -d --name 6thstreet \
   -e VIRTUAL_HOST=www.6thstreet.xyz  \
   -e VIRTUAL_DOMAIN=www.6thstreet.xyz \
   -e MYSQL_USER=mydbuser \
@@ -17,5 +16,6 @@ docker run -d - \
   -e USER_EMAIL=ningappa@poweruphosting.com  \
   -e FILEMANAGERUSER=filemgr \
   -e FILEMANAGERPASSWORD=filepassword \
+  -e HOSTID=1212
   ubuntu-joomla
   ```
