@@ -9,6 +9,7 @@ RUN apt-get install -y git apache2 php5-cli php5-mysql php5-gd php5-curl  php5-s
 	rm -r /var/lib/apt/lists/*
 	
 RUN sed -i -e 's/^bind-address\s*=\s*127.0.0.1/#bind-address = 127.0.0.1/' /etc/mysql/my.cnf
+RUN sed -i "s/skip-external-locking/skip-external-locking\ninnodb_use_native_aio = 0\ninnodb_buffer_pool_size = 20M\n/" /etc/mysql/my.cnf
 
 RUN apt-get clean && a2enmod rewrite
 
